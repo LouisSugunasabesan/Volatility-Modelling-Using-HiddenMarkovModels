@@ -1,4 +1,4 @@
-# Volatility-Modelling-Using-HIddenMarkovModels
+# Volatility-Modelling-Using-HiddenMarkovModels
 ***Applying Hidden Markov Models to model Gold Intraday Volatility by detecting regime switches from low-volatility regimes to high-volatility***
 
 > **Hidden Markov Models (HMMs) are a class of probabilistic graphical model that allow us to predict a sequence of unknown (hidden) variables from a set of observed variables. A > simple example of an HMM is predicting the weather (hidden variable) based on the type of clothes that someone wears (observed)."**
