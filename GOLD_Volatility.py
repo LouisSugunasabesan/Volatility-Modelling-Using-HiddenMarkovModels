@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 
@@ -20,94 +14,40 @@ import warnings; warnings.simplefilter('ignore')
 
 DATA_PATH = "D:/Tick Data/GLD.csv"
 
-
-# In[2]:
-
-
 df = pd.read_csv(DATA_PATH, index_col=0, parse_dates=True)
 df.sort_index()
-df
-
-
-# In[3]:
-
 
 df.drop([' Volume', ' Open', ' High', ' Low'],axis=1, inplace=True)
-
-
-# In[4]:
-
-
 df.columns = ['Close']
-
-
-# In[5]:
-
 
 nullvaluecheck = pd.DataFrame(df.isna().sum().sort_values(ascending=False)*100/df.shape[0],columns=['missing %']).head(60)
 nullvaluecheck.style.background_gradient(cmap='PuBu')
 
-
-# In[6]:
-
-
 returns = np.log(df['Close']).diff()
 returns.dropna(inplace=True)
-
-
-# In[7]:
-
 
 returns.plot(kind='hist',bins=150)
 plt.title(label='Distribution of GOLD Returns', size=15)
 plt.show()
 
-
-# In[8]:
-
-
 split = int(0.2*len(returns))
 X = returns[:-split]
 X_test = returns[-split:]
-
-
-# In[9]:
-
 
 pd.DataFrame(X).plot()
 plt.title(label='GOLD Training Set', size=15)
 plt.show()
 
-
-# In[10]:
-
-
 pd.DataFrame(X_test).plot()
 plt.title(label='GOLD Testing Set', size=15)
 plt.show()
 
-
-# In[11]:
-
-
 X = X.to_numpy().reshape(-1, 1)
 X_test = X_test.to_numpy().reshape(-1, 1)
 
-
-# In[12]:
-
-
 model = hmm.GaussianHMM(n_components=2, covariance_type="diag", verbose=True)
 
-
-# In[13]:
-
-
 get_ipython().run_cell_magic('time', '', 'model.fit(X)')
-
-
-# In[14]:
-
 
 model.transmat_ = np.array([
                             [0.8, 0.2],
@@ -116,10 +56,6 @@ model.transmat_ = np.array([
 
 Z = model.predict(X_test)
 Z_train = model.predict(X)
-
-
-# In[15]:
-
 
 # Compute State Changes
 returns_train0 = np.empty(len(Z_train))
@@ -146,9 +82,6 @@ plt.legend()
 plt.tight_layout()
 
 
-# In[16]:
-
-
 # Compute State Changes
 returns0 = np.empty(len(Z))
 returns1 = np.empty(len(Z))
@@ -173,9 +106,6 @@ plt.title(label='GOLD Volatility Clusters', size=15)
 
 plt.legend()
 plt.tight_layout()
-
-
-# In[ ]:
 
 
 
