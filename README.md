@@ -15,4 +15,5 @@ I have chosen to make this piece of research public as intra-day investing does 
 
 All data and notebooks are provided.
 
+Here is what the model outputs for the last circa 500 days of Gold price movement. As you can see highlighted in red are the clusters of high volatility.
 ![Here you can see the clusters of volatility ](https://github.com/sweg44/Volatility-Modelling-Using-HiddenMarkovModels/blob/main/Gold_Volatility.png)
